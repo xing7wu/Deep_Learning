@@ -1,3 +1,5 @@
+#注意，这个模型没有训练过程，只是呈现了神经网络的大概架构
+
 import torch
 from torch import nn
 
