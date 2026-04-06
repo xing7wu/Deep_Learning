@@ -1,5 +1,5 @@
 """
-3层神经网络——手写数字识别
+神经网络——手写数字识别
 """
 import pandas as pd
 from sklearn.model_selection import train_test_split
