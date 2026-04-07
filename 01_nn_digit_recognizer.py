@@ -57,11 +57,11 @@ for epoch in range(epoch):
     model.train()
     train_total_loss = 0
     train_total_acc = 0
-    for input, target in train_loader:
+    for enter, target in train_loader:
         # 数据迁移
-        input, target = input.to(device), target.to(device)
+        enter, target = enter.to(device), target.to(device)
         # 前向传播
-        output = model(input)
+        output = model(enter)
         # 计算损失
         loss = loss_fn(output, target)
         # 反向传播
@@ -72,7 +72,7 @@ for epoch in range(epoch):
         optimizer.zero_grad()
 
         # 记录损失
-        train_total_loss += loss.item() * input.shape[0]
+        train_total_loss += loss.item() * enter.shape[0]
         # 记录准确个数
         train_total_acc += output.argmax(dim=-1).eq(target).sum().item()
     # 得到该epoch的损失和准确率
@@ -85,9 +85,9 @@ print('\n···································�
 model.eval()
 val_total_loss = 0
 val_total_acc = 0
-for input, target in val_dataset:
-    input, target = input.to(device), target.to(device)
-    output = model(input)
+for enter, target in val_dataset:
+    enter, target = enter.to(device), target.to(device)
+    output = model(enter)
     loss = loss_fn(output, target)
     val_total_loss += loss.item()
     y_pred = output.argmax(dim=-1)
