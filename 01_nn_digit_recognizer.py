@@ -23,10 +23,10 @@ x_train, x_val, y_train, y_val = train_test_split(X, y, test_size=0.3, random_st
 #   特征归一化
 scaler = MinMaxScaler()
 x_train = scaler.fit_transform(x_train)
-x_test = scaler.transform(x_val)
+x_val = scaler.transform(x_val)
 #   转换成Tensor
 x_train = torch.tensor(x_train).float()
-x_val = torch.tensor(x_test).float()
+x_val = torch.tensor(x_val).float()
 y_train = torch.tensor(y_train.values)
 y_val = torch.tensor(y_val.values)
 
