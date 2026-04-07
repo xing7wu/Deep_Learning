@@ -34,6 +34,7 @@ y_val = torch.tensor(y_val.values)
 train_dataset = TensorDataset(x_train, y_train)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 val_dataset = TensorDataset(x_val, y_val)
+val_loader = DataLoader(val_dataset, batch_size=batch_size)
 
 # 定义模型
 model = nn.Sequential(
@@ -53,7 +54,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 model.to(device)
 
 # 模型训练
-for epoch in range(epoch):
+for i in range(epoch):
     model.train()
     train_total_loss = 0
     train_total_acc = 0
@@ -85,11 +86,11 @@ print('\n···································�
 model.eval()
 val_total_loss = 0
 val_total_acc = 0
-for enter, target in val_dataset:
+for enter, target in val_loader:
     enter, target = enter.to(device), target.to(device)
     output = model(enter)
     loss = loss_fn(output, target)
-    val_total_loss += loss.item()
+    val_total_loss += loss.item() * enter.shape[0]
     y_pred = output.argmax(dim=-1)
     val_total_acc += y_pred.eq(target).sum()
 this_val_loss = val_total_loss / len(val_dataset)
